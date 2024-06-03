@@ -3,9 +3,15 @@ import 'screens/buses.dart';
 import 'screens/statistics.dart';
 import 'screens/trips.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'database.dart';
 
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Создай базу данных перед запуском приложения:
+  await createDatabase();
+
   runApp(const BusApp());
 }
 
@@ -15,8 +21,9 @@ class BusApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    createDatabase();
     return MaterialApp(
-      title: 'A for dictation',
+      title: 'Мои поездки',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFB3E9F5)),
         useMaterial3: true,
