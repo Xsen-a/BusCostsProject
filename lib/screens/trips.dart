@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_trip.dart';
 import 'package:bus_costs/modules/get_trips_widgets.dart';
+import 'package:bus_costs/ui/widgets/trip.dart';
 
 class TripsPage extends StatefulWidget {
   const TripsPage({super.key, required this.title});
@@ -62,7 +63,14 @@ class _TripsPageState extends State<TripsPage> {
                     ),
                   ),
                 ),
-                //TripWidget(bus_number: '17', trip_date: '2024-02-06', trip_time: '17:02', trip_cost: '50', trip_color: 0xFFFF604A),
+                TripWidget(
+                    bus_number: '17',
+                    trip_date: '2024-02-06',
+                    trip_time: '17:02',
+                    trip_cost: '50',
+                    trip_color: 0xFFFF604A),
+
+                // Нужно вывести список виджетов поездок
                 LayoutBuilder(builder:
                     (BuildContext context, BoxConstraints constraints) {
                   return FutureBuilder<List<Widget>>(
