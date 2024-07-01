@@ -1,3 +1,4 @@
+import 'package:bus_costs/modules/get_buses_widgtes.dart';
 import 'package:flutter/material.dart';
 import 'package:bus_costs/ui/widgets/bus_info.dart';
 import 'add_bus.dart';
@@ -16,18 +17,19 @@ class _BusesPageState extends State<BusesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0FEFF),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFB3E9F5),
-        title: Text(widget.title),
-      ),
-      body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: Container(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        backgroundColor: Color(0xFFF0FEFF),
+        appBar: AppBar(
+          backgroundColor: Color(0xFFB3E9F5),
+          title: Text(widget.title),
+        ),
+        body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 20.0),
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
@@ -46,30 +48,47 @@ class _BusesPageState extends State<BusesPage> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: Text(
-                          'Добавить маршрут',
+                        child: const Text(
+                          'Добавить Маршрут',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFF123A43),
                             fontSize: 14,
-                            fontFamily: 'Nunito',
+                            //fontFamily: 'Nunito',
                             fontWeight: FontWeight.w800,
                             height: 0,
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  BusWidget(
-                      bus_number: '17',
-                      trip_cost: '50',
-                      trip_color: 0xFFFF604A),
-                  BusWidget(
-                      bus_number: '6',
-                      trip_cost: '38',
-                      trip_color: 0xFF9EFFB9)
-                ],
-              ))),
-    );
+                    )),
+                FutureBuilder<List<Widget>>(
+                  future: getBusesWidgets(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasData) {
+                      List<Widget> tripsWidgetsList = snapshot.data!;
+                      return Expanded(
+                          child: Container(
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: tripsWidgetsList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return tripsWidgetsList[index];
+                                },
+                              )));
+                    } else if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Ошибка при загрузке данных'),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              ],
+            )));
   }
 }

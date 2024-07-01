@@ -17,7 +17,7 @@ class TripWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
+      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
       width: MediaQuery.of(context).size.width - 40,
       height: 60,
       decoration: ShapeDecoration(
@@ -39,7 +39,7 @@ class TripWidget extends StatelessWidget {
               style: const TextStyle(
                 color: Color(0xFF123A43),
                 fontSize: 24,
-                fontFamily: 'Nunito',
+                //fontFamily: 'Nunito',
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -61,7 +61,7 @@ class TripWidget extends StatelessWidget {
                       style: const TextStyle(
                         color: Color(0xFF316570),
                         fontSize: 14,
-                        fontFamily: 'Nunito',
+                        //fontFamily: 'Nunito',
                         fontWeight: FontWeight.w800,
                         height: 0,
                       ),
@@ -72,7 +72,7 @@ class TripWidget extends StatelessWidget {
                       style: const TextStyle(
                         color: Color(0xFF316570),
                         fontSize: 14,
-                        fontFamily: 'Nunito',
+                        //fontFamily: 'Nunito',
                         fontWeight: FontWeight.w800,
                         height: 0,
                       ),
@@ -98,7 +98,7 @@ class TripWidget extends StatelessWidget {
               style: const TextStyle(
                 color: Color(0xFF1E1E1E),
                 fontSize: 20,
-                fontFamily: 'Nunito',
+                //fontFamily: 'Nunito',
                 fontWeight: FontWeight.w800,
                 height: 0,
               ),
