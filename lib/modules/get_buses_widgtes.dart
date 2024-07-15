@@ -14,21 +14,19 @@ Future<List<Widget>> getBusesWidgets() async {
   for (var bus in buses) {
     String colorValue = bus["bus_color"].toString().replaceAll("#", "0xFF");
     String bus_type_str;
-    if (bus["bus_type"] == 1)
-    {
+    if (bus["bus_type"] == 1) {
       bus_type_str = "А";
-    }
-    else
-    {
+    } else {
       bus_type_str = "Т";
     }
-    busesWidgetList.add(BusWidget(
-        bus_number: bus["bus_num"],
-        bus_type: bus_type_str,
-        trip_cost: bus["bus_cost"],
-        trip_color: colorValue));
+    busesWidgetList.add(
+      BusWidget(
+          bus_number: bus["bus_num"],
+          bus_type: bus_type_str,
+          trip_cost: bus["bus_cost"],
+          trip_color: colorValue,
+          id: bus["bus_id"].toString()),
+    );
   }
   return busesWidgetList;
 }
-
-

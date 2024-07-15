@@ -34,8 +34,14 @@ class _TripsPageState extends State<TripsPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                AddTripPage(title: 'Добавить поездку')));
+                            builder: (context) => AddTripPage(
+                                title: 'Добавить поездку',
+                                tripDate: '',
+                                tripTime: '',
+                                ticketStatus: false,
+                                busId: '',
+                                busCost: '',
+                                updateStatus: false)));
                   },
                   child: Container(
                     height: 40,

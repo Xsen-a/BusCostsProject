@@ -1,11 +1,11 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-void addNewBus(busType, busNumber, busCost, busColor) async {
+void updateBus(busType, busNumber, busCost, busColor, busId) async {
   String path = join(await getDatabasesPath(), 'busDatabase.db');
   Database database = await openDatabase(path);
 
-  if (busType == "А")
+  if (busType == "А" || busType == "1")
     busType = "1";
   else
     busType = "2";
@@ -16,8 +16,9 @@ void addNewBus(busType, busNumber, busCost, busColor) async {
     formattedBusColor = busColor.replaceAll("0xFF", "#");
   else
     formattedBusColor = busColor;
+  print(busId);
 
-  await database.insert(
+  int rows = await database.update(
     'tblBus',
     {
       'bus_type': busType,
@@ -25,11 +26,19 @@ void addNewBus(busType, busNumber, busCost, busColor) async {
       'bus_cost': busCost,
       'bus_color': formattedBusColor
     },
-    conflictAlgorithm: ConflictAlgorithm.ignore,
+    where: 'bus_id = ?',
+    whereArgs: [busId],
   );
+
+  if (rows > 0) {
+    print('Данные успешно обновлены');
+  } else {
+    print('Ошибка при обновлении данных');
+  }
 }
 
-Future<bool> checkBusExistence(String busNumber, String busType) async {
+
+Future<bool> checkBusExistenceUpdate(String busNumber, String busType, busId) async {
   String path = join(await getDatabasesPath(), 'busDatabase.db');
   Database database = await openDatabase(path);
 
@@ -40,13 +49,13 @@ Future<bool> checkBusExistence(String busNumber, String busType) async {
 
   List<Map<String, dynamic>> buses = await database.query(
       'tblBus',
-      where: 'bus_num = "$busNumber" AND bus_type = "$busType"',
-      limit: 1);
+      columns: ["bus_id"],
+      where: 'bus_num = "$busNumber" AND bus_type = "$busType"');
 
-    if (buses.isEmpty) {
-      return false;
-    } else {
-      return true;
-    }
+  if (buses.length == 1) {
+    return true;
+  } else {
+    return false;
+  }
 }
 

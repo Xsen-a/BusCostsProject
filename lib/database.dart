@@ -28,14 +28,14 @@ Future<void> createDatabase() async {
             );
           ''');
       // Заполнение
-      await db.execute('''
-            INSERT INTO tblBus(bus_type, bus_num, bus_cost, bus_color) VALUES
-            (1, '17', '50', '#FF604A');
-          ''');
-      await db.execute('''
-            INSERT INTO tblBus(bus_type, bus_num, bus_cost, bus_color) VALUES
-            (2, '6', '38', '#9EFFB9');
-          ''');
+      // await db.execute('''
+      //       INSERT INTO tblBus(bus_type, bus_num, bus_cost, bus_color) VALUES
+      //       (1, '17', '50', '#FF604A');
+      //     ''');
+      // await db.execute('''
+      //       INSERT INTO tblBus(bus_type, bus_num, bus_cost, bus_color) VALUES
+      //       (2, '6', '38', '#9EFFB9');
+      //     ''');
       await db.execute('''
             INSERT INTO tblTrip(trip_date, trip_time, ticket_status, bus_id, bus_cost) VALUES
             ('2024-06-02', '17:00', false, 1, '50');

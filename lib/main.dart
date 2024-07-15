@@ -28,27 +28,36 @@ class BusApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFB3E9F5)),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      home: const MainScreen(selectedIndex: 1),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int selectedIndex;
+  const MainScreen({super.key, required this.selectedIndex});
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 1;
+  late int currentSelectedIndex = 1;
+
   Color navBarColor = Color(0xFFB3E9F5);
+
+  @override
+  void initState() {
+    super.initState();
+    currentSelectedIndex = widget.selectedIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      currentSelectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
@@ -59,7 +68,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        body: _pages[_selectedIndex],
+        body: _pages[currentSelectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -72,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                 icon: SvgPicture.asset("assets/buses.svg"),
                 label: 'Транспорт'),
           ],
-          currentIndex: _selectedIndex,
+          currentIndex: currentSelectedIndex,
           onTap: _onItemTapped,
           backgroundColor: navBarColor,
         ),

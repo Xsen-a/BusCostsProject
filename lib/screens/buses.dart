@@ -36,7 +36,8 @@ class _BusesPageState extends State<BusesPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    AddBusPage(title: 'Добавить маршрут')));
+                                    AddBusPage(title: 'Добавить маршрут', value: 1, busTypeStr: "А", chosenColor: "0xFFFF9800",
+                                        currentBusNumber: "", currentCost: "", id: "", updateStatus: false,)));
                       },
                       child: Container(
                         height: 40,

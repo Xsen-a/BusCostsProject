@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:bus_costs/screens/add_bus.dart';
 
-class BusWidget extends StatelessWidget {
+class PreviewWidget extends StatelessWidget {
   final String bus_number;
   final String bus_type;
   final String trip_cost;
   final String trip_color;
   final String id;
 
-  BusWidget({
+  PreviewWidget({
     required this.bus_number,
     required this.bus_type,
     required this.trip_cost,
@@ -30,23 +30,7 @@ class BusWidget extends StatelessWidget {
     else
       value = 2;
 
-    return InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AddBusPage(
-                        title: 'Редактировать маршрут',
-                        value: value,
-                        busTypeStr: bus_type,
-                        chosenColor: trip_color,
-                        currentBusNumber: bus_number,
-                        currentCost: trip_cost,
-                        id: id,
-                        updateStatus: true,
-                      )));
-        },
-        child: Container(
+    return Container(
           margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
           width: MediaQuery.of(context).size.width - 40,
           height: 80,
@@ -114,6 +98,6 @@ class BusWidget extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        );
   }
 }
